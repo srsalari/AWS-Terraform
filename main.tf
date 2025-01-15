@@ -10,31 +10,31 @@ terraform {
 }
 
 provider "aws" {
-  region = "ca-central-1"
+  region = var.region
 }
 
 resource "aws_instance" "app_server" {
-  ami                    = "ami-04479848f66ed1eb4"
-  instance_type          = "t2.micro"
-  vpc_security_group_ids = ["sg-088a38b5caf54ea8d"]
-  subnet_id              = "subnet-0c03ab023bf0a7ccf"
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  vpc_security_group_ids = [var.vpc_security_group_id]
+  subnet_id              = var.subnet_id
   tags = {
     Name = "ExampleAppServerInstance"
   }
 }
 
 resource "aws_instance" "web_server" {
-  ami                    = "ami-04479848f66ed1eb4"
-  instance_type          = "t2.micro"
-  vpc_security_group_ids = ["sg-088a38b5caf54ea8d"]
-  subnet_id              = "subnet-0c03ab023bf0a7ccf"
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  vpc_security_group_ids = [var.vpc_security_group_id]
+  subnet_id              = var.subnet_id
   tags = {
     Name = "ExampleAppServerInstance"
   }
 }
 
 resource "aws_s3_bucket" "my-bucket" {
-  bucket = "saeedmetrocollege14jan2024"
+  bucket = var.bucket_name
 
   tags = {
     Name        = "My bucket"
